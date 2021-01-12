@@ -104,6 +104,7 @@ pub type NinjaEnv = Vec<(String, String)>;
 fn ninja(gn_out_dir: &PathBuf, maybe_env: Option<NinjaEnv>) -> Command {
   let cmd_string = env::var("NINJA").unwrap_or_else(|_| "ninja".to_owned());
   let mut cmd = Command::new(cmd_string);
+  cmd.arg("-j1");
   cmd.arg("-C");
   cmd.arg(&gn_out_dir);
   if let Some(env) = maybe_env {
